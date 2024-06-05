@@ -3,9 +3,9 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import DatabaseConfiguration from './config/database.config';
 import { DatabaseModule } from './providers/database/database.module';
-import { GlobalExceptionFilter } from './common/exceptions/rpc-exception.filter';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { GlobalExceptionFilter } from './common/exceptions/rpc-exception.filter';
 
 @Module({
   imports: [

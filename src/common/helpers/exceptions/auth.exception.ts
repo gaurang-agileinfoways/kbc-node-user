@@ -1,102 +1,76 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
 
 export const AuthExceptions = {
   TokenExpired(): any {
-    return new HttpException(
-      {
-        message: 'Token Expired use RefreshToken',
-        error: 'TokenExpiredError',
-        statusCode: HttpStatus.FORBIDDEN,
-      },
-      HttpStatus.FORBIDDEN,
-    );
+    return new RpcException({
+      message: 'Token Expired use RefreshToken',
+      error: 'TokenExpiredError',
+      statusCode: HttpStatus.FORBIDDEN,
+    });
   },
 
   InvalidToken(): any {
-    return new HttpException(
-      {
-        message: 'Invalid Token',
-        error: 'InvalidToken',
-        statusCode: HttpStatus.FORBIDDEN,
-      },
-      HttpStatus.FORBIDDEN,
-    );
+    return new RpcException({
+      message: 'Invalid Token',
+      error: 'InvalidToken',
+      statusCode: HttpStatus.FORBIDDEN,
+    });
   },
 
   ForbiddenException(): any {
-    return new HttpException(
-      {
-        message: 'This resource is forbidden from this user',
-        error: 'UnAuthorizedResourceError',
-        statusCode: HttpStatus.FORBIDDEN,
-      },
-      HttpStatus.FORBIDDEN,
-    );
+    return new RpcException({
+      message: 'This resource is forbidden from this user',
+      error: 'UnAuthorizedResourceError',
+      statusCode: HttpStatus.FORBIDDEN,
+    });
   },
 
   InvalidUserId(): any {
-    return new HttpException(
-      {
-        message: 'Invalid User Id',
-        error: 'InvalidUserId',
-        statusCode: HttpStatus.FORBIDDEN,
-      },
-      HttpStatus.FORBIDDEN,
-    );
+    return new RpcException({
+      message: 'Invalid User Id',
+      error: 'InvalidUserId',
+      statusCode: HttpStatus.FORBIDDEN,
+    });
   },
 
   InvalidIdPassword(): any {
-    return new HttpException(
-      {
-        message: 'Invalid Username or Password',
-        error: 'InvalidIdPassword',
-        statusCode: HttpStatus.UNAUTHORIZED,
-      },
-      HttpStatus.UNAUTHORIZED,
-    );
+    return new RpcException({
+      message: 'Invalid Username or password',
+      error: 'InvalidIdPassword',
+      statusCode: HttpStatus.UNAUTHORIZED,
+    });
   },
 
   AccountNotexist(): any {
-    return new HttpException(
-      {
-        message: 'Account does not exist!',
-        error: 'accountNotexist',
-        statusCode: HttpStatus.FORBIDDEN,
-      },
-      HttpStatus.FORBIDDEN,
-    );
+    return new RpcException({
+      message: 'Account does not exist!',
+      error: 'AccountNotexist',
+      statusCode: HttpStatus.FORBIDDEN,
+    });
   },
 
   AccountNotActive(): any {
-    return new HttpException(
-      {
-        message: 'Account not active!',
-        error: 'accountNotActive',
-        statusCode: HttpStatus.UNAUTHORIZED,
-      },
-      HttpStatus.UNAUTHORIZED,
-    );
+    return new RpcException({
+      message: 'Account not active!',
+      error: 'accountNotActive',
+      statusCode: HttpStatus.UNAUTHORIZED,
+    });
   },
 
   InvalidOldPassword(): any {
-    return new HttpException(
-      {
-        message: 'Invalid Old password!',
-        error: 'InvalidOldPassword',
-        statusCode: HttpStatus.UNAUTHORIZED,
-      },
-      HttpStatus.UNAUTHORIZED,
-    );
+    return new RpcException({
+      message: 'Invalid Old password!',
+      error: 'InvalidOldPassword',
+      statusCode: HttpStatus.UNAUTHORIZED,
+    });
   },
 
   AccountNotVerified() {
-    return new HttpException(
-      {
-        message: 'Your account is not verified, Please verify',
-        error: 'AccountNotVerified',
-        statusCode: HttpStatus.UNAUTHORIZED,
-      },
-      HttpStatus.UNAUTHORIZED,
-    );
+    return new RpcException({
+      message: 'Your account is not verified, Please verify',
+      error: 'AccountNotVerified',
+      statusCode: HttpStatus.UNAUTHORIZED,
+    });
   },
 };

@@ -86,7 +86,6 @@ export class UsersService {
       if (!bcrypt.compareSync(params.password, user.password)) {
         throw AuthExceptions.InvalidIdPassword();
       }
-      console.log(user);
 
       return {
         id: user.id,
@@ -96,7 +95,7 @@ export class UsersService {
         isActive: user.isActive,
       };
     } catch (error) {
-      if (error?.response?.error) {
+      if (error) {
         throw error;
       } else {
         throw CustomError.UnknownError(error?.message);
