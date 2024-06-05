@@ -1,50 +1,31 @@
-import {
-  Body,
-  Controller,
-  // Req,
-  // UploadedFile,
-  // UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { UsersService } from './users.service';
-// import {
-//   ChangePasswordDto,
-//   CommonListDto,
-//   EmailDto,
-//   ForgotPasswordDto,
-//   IdDto,
-//   LoginDto,
-//   ResetPasswordDto,
-//   TokenDto,
-// } from 'src/common/dto/common.dto';
 import { ResponseMessage } from 'src/common/decorators/response.decorator';
 import {
+  RESPONSE_SUCCESS,
+  USER_LISTED,
   USER_LOGIN,
-  // FILE_UPLOADED,
-  // FORGOT_PASSWORD_REQUESTED,
-  // PASSWORD_CHANGED,
-  // PROFILE_UPDATED,
-  // PROFILE_VERIFIED,
-  // RESET_PASSWORD,
-  // USER_LISTED,
-  // USER_LOGIN,
   USER_SIGNUP,
-  // USER_VIEW,
-  // VERIFICATION_LINK_SEND,
 } from 'src/common/constants/response.constant';
 import { MessagePattern } from '@nestjs/microservices';
 import { CreateUserDto } from './dto/create-user.dto';
-import { LOGIN, SIGNUP } from 'src/common/constants/message-pattern.constant';
-import { LoginDto } from 'src/common/dto/common.dto';
+import {
+  GET_ALL_USER,
+  GET_BY_ID,
+  LOGIN,
+  SIGNUP,
+} from 'src/common/constants/message-pattern.constant';
+import { CommonListDto, IdDto, LoginDto } from 'src/common/dto/common.dto';
 
 @Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // @ResponseMessage(USER_LISTED)
-  // @MessagePattern('user_get_all')
-  // async getAllUsers(@Body() body: CommonListDto) {
-  //   return await this.usersService.getAllUsers(body);
-  // }
+  @ResponseMessage(USER_LISTED)
+  @MessagePattern(GET_ALL_USER)
+  async getAllUsers(@Body() body: CommonListDto) {
+    return await this.usersService.getAllUsers(body);
+  }
 
   // @ResponseMessage(USER_VIEW)
   // @MessagePattern('user_view')
@@ -102,9 +83,9 @@ export class UsersController {
   //   return await this.usersService.verifySignupUser(body);
   // }
 
-  // @ResponseMessage(VERIFICATION_LINK_SEND)
-  // @MessagePattern('user_get-verification-link')
-  // async sendVerificationLink(@Body() body: EmailDto) {
-  //   return await this.usersService.sendVerificationLink(body.email);
-  // }
+  @ResponseMessage(RESPONSE_SUCCESS)
+  @MessagePattern(GET_BY_ID)
+  async sendVerificationLink(@Body() body: IdDto) {
+    return await this.usersService.getUserById(+body._id);
+  }
 }

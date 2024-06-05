@@ -27,14 +27,12 @@ export class TransformInterceptor<T>
       this.reflector.get<string>(ResponseMessageKey, context.getHandler()) ??
       '';
 
-    const s = next.handle().pipe(
+    return next.handle().pipe(
       map((data) => ({
         data,
         statusCode: context.switchToHttp().getResponse().statusCode,
         message: responseMessage,
       })),
     );
-    console.log('afsdsd => ', s);
-    return s;
   }
 }
