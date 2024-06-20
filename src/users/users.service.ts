@@ -93,6 +93,7 @@ export class UsersService {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        phoneNumber: user.phoneNumber,
         role: user.role,
         isActive: user.isActive,
       };
@@ -176,6 +177,18 @@ export class UsersService {
 
   async getUserByEmail(email: string): Promise<any> {
     return await this.userRepo.findOne({ where: { email: email } });
+  }
+
+  async getSelectedUsers(body: string[]) {
+    try {
+      const users = await this.userRepo
+        .createQueryBuilder('user')
+        .where('user.id IN (:...ids)', { ids: body })
+        .orderBy('user.id', 'ASC')
+        .getMany();
+
+      return users;
+    } catch (error) {}
   }
 
   async checkUserStatus(email: string) {

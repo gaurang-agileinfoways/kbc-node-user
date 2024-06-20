@@ -12,10 +12,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 import {
   GET_ALL_USER,
   GET_BY_ID,
+  GET_SELECTED_USER_BY_ID,
   LOGIN,
   SIGNUP,
 } from 'src/common/constants/message-pattern.constant';
-import { CommonListDto, IdDto, LoginDto } from 'src/common/dto/common.dto';
+import { CommonListDto, LoginDto } from 'src/common/dto/common.dto';
 
 @Controller()
 export class UsersController {
@@ -27,12 +28,6 @@ export class UsersController {
     return await this.usersService.getAllUsers(body);
   }
 
-  // @ResponseMessage(USER_VIEW)
-  // @MessagePattern('user_view')
-  // async viewUser(@Body() body: IdDto) {
-  //   return await this.usersService.viewUser(body);
-  // }
-
   // @ResponseMessage(FILE_UPLOADED)
   // @MessagePattern('user_upload')
   // @UseInterceptors(FileUploadingInterceptor)
@@ -43,7 +38,6 @@ export class UsersController {
   @ResponseMessage(USER_LOGIN)
   @MessagePattern(LOGIN)
   async login(@Body() params: LoginDto): Promise<any> {
-    console.log('params: ', params);
     return await this.usersService.login(params);
   }
 
@@ -77,15 +71,16 @@ export class UsersController {
   //   return await this.usersService.profileChange(body, request);
   // }
 
-  // @ResponseMessage(PROFILE_VERIFIED)
-  // @MessagePattern('user_verify')
-  // async verifySignupUser(@Body() body: TokenDto) {
-  //   return await this.usersService.verifySignupUser(body);
-  // }
+  @ResponseMessage(RESPONSE_SUCCESS)
+  @MessagePattern(GET_SELECTED_USER_BY_ID)
+  async getSelectedUsers(@Body() body: any) {
+    console.log('body: ', body);
+    return await this.usersService.getSelectedUsers(body.id);
+  }
 
   @ResponseMessage(RESPONSE_SUCCESS)
   @MessagePattern(GET_BY_ID)
-  async sendVerificationLink(@Body() body: IdDto) {
-    return await this.usersService.getUserById(+body._id);
+  async getUserById(@Body() body: any) {
+    return await this.usersService.getUserById(+body);
   }
 }
