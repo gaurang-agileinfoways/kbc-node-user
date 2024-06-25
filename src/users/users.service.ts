@@ -82,7 +82,6 @@ export class UsersService {
 
   async login(params: LoginDto): Promise<any> {
     try {
-      console.log('params: ', params);
       const user = await this.checkUserStatus(params.email);
 
       if (!bcrypt.compareSync(params.password, user.password)) {
