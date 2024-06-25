@@ -28,13 +28,6 @@ export class UsersController {
     return await this.usersService.getAllUsers(body);
   }
 
-  // @ResponseMessage(FILE_UPLOADED)
-  // @MessagePattern('user_upload')
-  // @UseInterceptors(FileUploadingInterceptor)
-  // async uploadImage(@UploadedFile() file: Express.Multer.File, @Req() req) {
-  //   return this.usersService.uploadImage(file, req);
-  // }
-
   @ResponseMessage(USER_LOGIN)
   @MessagePattern(LOGIN)
   async login(@Body() params: LoginDto): Promise<any> {
@@ -47,34 +40,9 @@ export class UsersController {
     return await this.usersService.create(params);
   }
 
-  // @ResponseMessage(FORGOT_PASSWORD_REQUESTED)
-  // @MessagePattern('user_forgot-password')
-  // async forgotPassword(@Body() body: ForgotPasswordDto) {
-  //   return await this.usersService.forgotPassword(body);
-  // }
-
-  // @ResponseMessage(RESET_PASSWORD)
-  // @MessagePattern('user_reset-password')
-  // async resetPassword(@Body() body: ResetPasswordDto) {
-  //   return await this.usersService.resetPassword(body);
-  // }
-
-  // @ResponseMessage(PASSWORD_CHANGED)
-  // @MessagePattern('user_change-password')
-  // async changePassword(@Body() body: ChangePasswordDto, @Req() request) {
-  //   return await this.usersService.changePassword(body, request);
-  // }
-
-  // @ResponseMessage(PROFILE_UPDATED)
-  // @MessagePattern('user_change-profile')
-  // async profileChange(@Body() body: UpdateUserDto, @Req() request) {
-  //   return await this.usersService.profileChange(body, request);
-  // }
-
   @ResponseMessage(RESPONSE_SUCCESS)
   @MessagePattern(GET_SELECTED_USER_BY_ID)
   async getSelectedUsers(@Body() body: any) {
-    console.log('body: ', body);
     return await this.usersService.getSelectedUsers(body.id);
   }
 
